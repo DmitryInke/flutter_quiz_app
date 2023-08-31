@@ -27,13 +27,19 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = QuestionsScreen(chooseAnswer);
+    });
+  }
+
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = ResultScreen(selectedAnswers);
-        selectedAnswers = [];
+        activeScreen = ResultScreen(selectedAnswers, restartQuiz);
       });
     }
   }
